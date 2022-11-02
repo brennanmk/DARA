@@ -1,4 +1,7 @@
 /*
+Brennan Miller-Klugman
+Last Edited: 10/2/22
+based off code from:
 https://dev.mysql.com/doc/connector-net/en/connector-net-tutorials-sql-command.html
 https://github.com/freseco/Unity3d_MySQL_Client
 */

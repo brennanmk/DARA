@@ -1,5 +1,7 @@
 /*
-Based on:
+Brennan Miller-Klugman
+Last Edited: 10/2/22
+based off of code samples from:
 https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/ros_unity_integration/publisher.md
 https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/Actions.html
 */
