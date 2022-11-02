@@ -178,8 +178,8 @@ namespace Unity.Robotics.ROSTCPConnector
 
         protected virtual void OnTrackingFound()
         {
-            ROSConnection.m_RosIPAddress = "10.0.60.2";
-            ROSConnection.m_RosPort = 10000;
+            ROSConnection.m_RosIPAddress = ip;
+            ROSConnection.m_RosPort = port;
 
             SceneManager.LoadScene("AR");
         }
