@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - loading_screen
+  - loading
+  - failure
+  - success
+  - ui
+  - scripts
   layers:
   - Default
   - TransparentFX

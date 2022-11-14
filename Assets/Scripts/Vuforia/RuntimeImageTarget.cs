@@ -29,11 +29,11 @@ namespace Unity.Robotics.ROSTCPConnector
 
         IEnumerator RetrieveTextureFromWeb()
         {
-            string connStr = @"server=71.232.14.210;port=3307;user=root;password=NveQlG8bKp89hPWMdhdC6jBnd;database=ar;";
+            string connStr = @"server=98.229.202.174;port=3307;user=root;password=NveQlG8bKp89hPWMdhdC6jBnd;database=ar;";
             MySqlConnection conn = new MySqlConnection(connStr);
             conn.Open();
 
-            string sql = "SELECT image, name, image_target_width, ip_addr, port FROM robots";
+            string sql = "SELECT image, name, image_target_width, ip_addr, port, id FROM robots";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -54,24 +54,27 @@ namespace Unity.Robotics.ROSTCPConnector
                             var texture = DownloadHandlerTexture.GetContent(uwr);
                             imageFromWeb = texture;
                             Debug.Log("Image downloaded " + uwr);
-                            CreateImageTargetFromDownloadedTexture(rdr[1].ToString(), imageFromWeb, (float)rdr[2], rdr[3].ToString(), (int)rdr[4]); //https://stackoverflow.com/questions/37344167/how-to-get-float-value-with-sqldatareader
+                            CreateImageTargetFromDownloadedTexture(rdr[1].ToString(), imageFromWeb, (float)rdr[2], rdr[3].ToString(), (int)rdr[4], (int)rdr[5]); //https://stackoverflow.com/questions/37344167/how-to-get-float-value-with-sqldatareader
                         }
                     }
                 }
                 rdr.Close();
         }
-        void CreateImageTargetFromDownloadedTexture(string targetName, Texture2D imageFromWeb,  float width, string ip, int port)
+        void CreateImageTargetFromDownloadedTexture(string targetName, Texture2D imageFromWeb,  float width, string ip, int port, int id)
         {
-                var target = VuforiaBehaviour.Instance.ObserverFactory.CreateImageTarget(
-                    imageFromWeb,
-                    width,
-                    targetName
-                );
+            var target = VuforiaBehaviour.Instance.ObserverFactory.CreateImageTarget(
+                imageFromWeb,
+                width,
+                targetName
+            );
 
             // Add the DefaultObserverEventHandler to the newly created game object
             eventHandler = target.gameObject.AddComponent<ArrayedEventHandler>(); //add ArrayedEventHandler Script;
-            eventHandler.ip = ip;
+            eventHandler.id = id; 
+
+            eventHandler.ip = ip; 
             eventHandler.port = port;
+
 
             Debug.Log("Target created and active" + target);
         }
