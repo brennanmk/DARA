@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &605890775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -303,7 +303,15 @@ MonoBehaviour:
     m_Id: a22acf33-3d36-4449-9935-ade2b9b5ec20
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b71279d6-2475-45b1-8b37-b272a4344129
+      m_Path: <Gamepad>/leftStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 0
     m_Flags: 0
   publishMessageFrequency: 0.1
 --- !u!1 &705507993
@@ -815,7 +823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1212846097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1472,7 +1480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2117325114}
-  - component: {fileID: 2117325113}
+  - component: {fileID: 2117325115}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -1480,18 +1488,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2117325113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117325112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ca167984f61af45ac1e229ef0aeace, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2117325114
 Transform:
   m_ObjectHideFlags: 0
@@ -1507,3 +1503,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2117325115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117325112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c7a3a5cb0b39643a00d179cfe79da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

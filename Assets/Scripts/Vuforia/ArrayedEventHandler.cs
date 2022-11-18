@@ -196,8 +196,9 @@ public class ArrayedEventHandler : MonoBehaviour
             int iterator = static_variables.ros_connection.Count - 1;
             static_variables.id.Insert(iterator, id); 
 
-            ros_con.m_RosIPAddress = ip;
-            ros_con.m_RosPort = port;
+            ros_con.ShowHud = false;
+            ros_con.RosIPAddress = ip;
+            ros_con.RosPort = port;
 
             scripts.GetComponent<toggle_active>().open_loading();
 
