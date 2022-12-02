@@ -181,32 +181,31 @@ public class ArrayedEventHandler : MonoBehaviour
 
     protected virtual void OnTrackingFound()
     {
+        bool exists = false;
+        for(int i = 0; i < static_variables.robot.Count ; i++)
+        {
+            if(static_variables.robot[i].id == id){
+                exists = true;
+                break;
+            }
+        }
 
-        if(!static_variables.id.Contains(id)){
-            GameObject loading_screen = GameObject.FindWithTag("loading_screen");
-            GameObject loading_ui = GameObject.FindWithTag("loading");
-
+        if(!exists){
             GameObject scripts = GameObject.FindWithTag("scripts");
-
 
             ROSConnection ros_con = scripts.AddComponent<ROSConnection>();
             
-            static_variables.ros_connection.Add(ros_con);
+            static_variables.robot.Add(new data(id, ros_con, ip, port));
 
-            int iterator = static_variables.ros_connection.Count - 1;
-            static_variables.id.Insert(iterator, id); 
-
-            ros_con.ShowHud = false;
-            ros_con.RosIPAddress = ip;
-            ros_con.RosPort = port;
+            int iterator = static_variables.robot.Count - 1;; 
 
             scripts.GetComponent<toggle_active>().open_loading();
 
-            StartCoroutine(checkConnection(ros_con, iterator));
+            StartCoroutine(checkConnection(iterator));
         }
     }
 
-    protected virtual IEnumerator checkConnection(ROSConnection ros_con, int iterator)
+    protected virtual IEnumerator checkConnection(int iterator)
     {
         GameObject scripts = GameObject.FindWithTag("scripts");
 
@@ -215,16 +214,15 @@ public class ArrayedEventHandler : MonoBehaviour
         while(timer <= 5)
         {
             yield return new WaitForSeconds(1);
-            if(ros_con.HasConnectionError && timer >= 5)
+            if(static_variables.robot[iterator].ros_connection.HasConnectionError && timer >= 5)
             {            
                 scripts.GetComponent<toggle_active>().close_loading();
                 scripts.GetComponent<toggle_active>().open_failure();
 
-                static_variables.ros_connection.RemoveAt(iterator);
-                static_variables.id.RemoveAt(iterator);
+                Destroy(static_variables.robot[iterator].ros_connection);
+                static_variables.robot.RemoveAt(iterator);
 
-                Destroy(ros_con);
-            } else if(!ros_con.HasConnectionError){
+            } else if(!static_variables.robot[iterator].ros_connection.HasConnectionError){
                 scripts.GetComponent<toggle_active>().close_loading();
 
                 scripts.GetComponent<toggle_active>().open_success();

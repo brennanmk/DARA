@@ -10,6 +10,7 @@ TagManager:
   - success
   - ui
   - scripts
+  - side_bar
   layers:
   - Default
   - TransparentFX

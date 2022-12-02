@@ -29,7 +29,7 @@ public class joystick_twist_publisher : MonoBehaviour
     void Start()
     {
         // start the ROS connection
-        ros = static_variables.ros_connection[static_variables.id[0]];
+        ros = static_variables.robot[0].ros_connection;
         ros.RegisterPublisher<twistMsg>(topicName);
     }
 
