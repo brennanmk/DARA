@@ -11,6 +11,7 @@ TagManager:
   - ui
   - scripts
   - side_bar
+  - 1dof_joystick
   layers:
   - Default
   - TransparentFX
