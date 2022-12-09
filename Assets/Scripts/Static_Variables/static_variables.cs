@@ -27,6 +27,7 @@ public class data
     public float twist_speed { get; set; } = 0;
     public string multi_target_dataset { get; set; } = "";
     public string multi_target_name { get; set; } = "";
+    public string affect_topic { get; set; } = "";
 
     public MultiTargetBehaviour multi_target_behavior { get; set; }
 

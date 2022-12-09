@@ -43,7 +43,7 @@ public class variable_updater : MonoBehaviour
 
         for(int val = 0; val < static_variables.robot.Count; val++)
         {
-            string sql = $"SELECT ip_addr, port, twist_topic, base_dof, twist_speed, name, multi_target_dataset, multi_target_name FROM robots WHERE id = {static_variables.robot[val].id}";
+            string sql = $"SELECT ip_addr, port, twist_topic, base_dof, twist_speed, name, multi_target_dataset, multi_target_name, affect_topic FROM robots WHERE id = {static_variables.robot[val].id}";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -59,6 +59,7 @@ public class variable_updater : MonoBehaviour
                     static_variables.robot[val].name = rdr[5].ToString();
                     static_variables.robot[val].multi_target_dataset = rdr[6].ToString();
                     static_variables.robot[val].multi_target_name = rdr[7].ToString();
+                    static_variables.robot[val].affect_topic = rdr[8].ToString();
                 }
             
             rdr.Close();

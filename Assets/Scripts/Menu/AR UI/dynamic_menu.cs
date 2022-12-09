@@ -94,9 +94,12 @@ public class dynamic_menu : MonoBehaviour
                 affect.name = static_variables.robot[val].name + "_affectVisuals";
                 affect.transform.SetParent(item_container.transform);
                 affect.GetComponentInChildren<TextMeshProUGUI>().text = "Affect Visualization";
+                var affect_subscriber = affect.AddComponent<visual_affects>(); //add visual affect subscriber
+                affect_subscriber.robot = static_variables.robot[val];
 
+                var temp_iterator = val; //save val to pass into lamba https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
                 affect.GetComponent<Toggle>().onValueChanged.AddListener(delegate { //when toggled on, close sidebar and turn on affect visuals
-                    static_variables.robot[val].multi_target_behavior.enabled = affect.GetComponent<Toggle>().isOn;
+                    static_variables.robot[temp_iterator].multi_target_behavior.enabled = affect.GetComponent<Toggle>().isOn;
                     side_bar.SetActive(!affect.GetComponent<Toggle>().isOn);
                     open_menu_button.SetActive(affect.GetComponent<Toggle>().isOn);
                 });
@@ -157,6 +160,12 @@ public class dynamic_menu : MonoBehaviour
         MultiTargetBehaviour target = VuforiaBehaviour.Instance.ObserverFactory.CreateMultiTarget(
             dataSetPath,
             targetName);    
+
+        target.gameObject.AddComponent<DefaultObserverEventHandler>();
+        var img = target.gameObject.AddComponent<RawImage>();
+        img.texture = Resources.Load<Texture2D>("Resources/Emojis/happy"); //default to happy face
+
+        target.enabled = false; //default to inactive
 
         robot.multi_target_behavior = target;
     }

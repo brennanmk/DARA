@@ -1851,7 +1851,7 @@ Transform:
   - {fileID: 1930661975}
   - {fileID: 142693838}
   m_Father: {fileID: 2117325114}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &898393556
 Material:
@@ -2882,7 +2882,7 @@ Transform:
   - {fileID: 904775260}
   - {fileID: 911294002}
   m_Father: {fileID: 2117325114}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1379665850
 Material:
@@ -3595,7 +3595,7 @@ Transform:
   - {fileID: 176178368}
   - {fileID: 909560164}
   m_Father: {fileID: 2117325114}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1667164409
 Mesh:
@@ -4695,7 +4695,7 @@ Transform:
   - {fileID: 680219231}
   - {fileID: 1787095868}
   m_Father: {fileID: 2117325114}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &2109900074
 Material:
@@ -4822,7 +4822,6 @@ GameObject:
   - component: {fileID: 2117325114}
   - component: {fileID: 2117325115}
   - component: {fileID: 2117325116}
-  - component: {fileID: 2117325117}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -4887,15 +4886,3 @@ MonoBehaviour:
     type: 3}
   menu_item: {fileID: 7541585023474423801, guid: 1df312523bea081408ef7563e065d83c,
     type: 3}
---- !u!114 &2117325117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117325112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5702bc455b1a3ec4c8f17c49c8022431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
