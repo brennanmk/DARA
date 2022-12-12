@@ -161,9 +161,22 @@ public class dynamic_menu : MonoBehaviour
             dataSetPath,
             targetName);    
 
-        target.gameObject.AddComponent<DefaultObserverEventHandler>();
-        var img = target.gameObject.AddComponent<RawImage>();
-        img.texture = Resources.Load<Texture2D>("Resources/Emojis/happy"); //default to happy face
+
+        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane); //https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
+        plane.transform.SetParent(target.transform);
+        
+        //Update plane transform (these values were found by trial and error)
+        plane.transform.position = new Vector3(0, (float)0.25, 0);
+
+        Quaternion rotate = Quaternion.Euler(90, 0, 0); //https://docs.unity3d.com/ScriptReference/Transform-rotation.html
+        plane.transform.rotation = rotate;
+
+        plane.transform.localScale = new Vector3((float)0.01, (float)0.01, (float)0.01);
+
+        //Update plane material
+        var render = plane.GetComponent<Renderer>(); // https://forum.unity.com/threads/should-be-simple-but-i-just-cant-do-it-changing-texture-by-script.872356/
+        var emoji_material = Resources.Load<Material>("Resources/Emojis/Materials/happy"); //default to happy face
+        render.material = emoji_material;
 
         target.enabled = false; //default to inactive
 
