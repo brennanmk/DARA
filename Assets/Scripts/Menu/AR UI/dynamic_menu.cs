@@ -3,17 +3,6 @@ Brennan Miller-Klugman
 12/1/22
 
 Creates menu options for every connected robot using prefabs
-
-References:
-https://gamedev.stackexchange.com/questions/102431/how-to-create-gui-image-with-script
-
-https://stackoverflow.com/questions/69427848/how-to-modify-ui-text-via-script
-
-https://www.w3schools.com/cs/cs_switch.php
-
-https://docs.unity3d.com/2018.1/Documentation/ScriptReference/UI.Toggle-onValueChanged.html
-
-https://answers.unity.com/questions/674127/how-to-find-a-prefab-via-script.html
 */
 
 using System.Collections;
@@ -41,24 +30,40 @@ public class dynamic_menu : MonoBehaviour
     private List<GameObject> headers = new List<GameObject>();
 
     public void create()
+    /*
+    The create function is used to dynamically create menu options for each robot
+
+    References:
+    https://gamedev.stackexchange.com/questions/102431/how-to-create-gui-image-with-script
+    https://stackoverflow.com/questions/69427848/how-to-modify-ui-text-via-script
+    https://docs.unity3d.com/2018.1/Documentation/ScriptReference/UI.Toggle-onValueChanged.html
+    https://answers.unity.com/questions/674127/how-to-find-a-prefab-via-script.html
+    https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
+    https://www.w3schools.com/cs/cs_switch.php
+    */
     {
         for(int val = 0; val < static_variables.robot.Count; val++)
         {
+            //create a container to hold the header and items
             GameObject container = Instantiate(menu_container);
             container.name = "container_" + static_variables.robot[val].name;
             container.transform.SetParent(menu_options.transform);
 
+            //create header prefab 
             GameObject header = Instantiate(menu_header);
             header.name = "header_" + static_variables.robot[val].name;
             header.transform.SetParent(container.transform);
             header.GetComponentInChildren<TextMeshProUGUI>().text = static_variables.robot[val].name.ToUpper();
 
+            //create a container to hold menu items
             GameObject item_container = Instantiate(menu_item_container);
             item_container.name = "item_container_" + static_variables.robot[val].name;
             item_container.transform.SetParent(container.transform);
 
+            //create teleoperation menu item
             if(static_variables.robot[val].base_dof != 0)
             {
+                //add a menu item
                 GameObject twist_item = Instantiate(menu_item);
                 twist_item.name = static_variables.robot[val].name + "_twist";
                 twist_item.transform.SetParent(item_container.transform);
@@ -86,18 +91,22 @@ public class dynamic_menu : MonoBehaviour
                 joysticks.SetActive(false);
             }
 
+            //create affect menu item
             if (static_variables.robot[val].multi_target_dataset != "" && static_variables.robot[val].multi_target_name != "") //add cube
             {
                 StartCoroutine(getMultiTarget(static_variables.robot[val]));
 
+                //add a menu item
                 GameObject affect = Instantiate(menu_item);
                 affect.name = static_variables.robot[val].name + "_affectVisuals";
                 affect.transform.SetParent(item_container.transform);
                 affect.GetComponentInChildren<TextMeshProUGUI>().text = "Affect Visualization";
+                
+                //add a subscriber
                 var affect_subscriber = affect.AddComponent<visual_affects>(); //add visual affect subscriber
                 affect_subscriber.robot = static_variables.robot[val];
 
-                var temp_iterator = val; //save val to pass into lamba https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
+                var temp_iterator = val; 
                 affect.GetComponent<Toggle>().onValueChanged.AddListener(delegate { //when toggled on, close sidebar and turn on affect visuals
                     static_variables.robot[temp_iterator].multi_target_behavior.enabled = affect.GetComponent<Toggle>().isOn;
                     side_bar.SetActive(!affect.GetComponent<Toggle>().isOn);
@@ -114,11 +123,20 @@ public class dynamic_menu : MonoBehaviour
     IEnumerator getMultiTarget(data robot)
     {
         /* Function to create multi image target based on database info
-        *  based off of 
-        * https://answers.unity.com/questions/181893/copy-data-from-resources-to-persistent-data-path.html
-        * https://answers.unity.com/questions/228150/hold-or-wait-while-coroutine-finishes.html
-        * https://forum.unity.com/threads/download-a-file-from-url-and-save-it-to-persistentdatapath.520817/
+
+            References:
+            The following Unity forums were referenced:
+
+            https://answers.unity.com/questions/181893/copy-data-from-resources-to-persistent-data-path.html
+            https://answers.unity.com/questions/228150/hold-or-wait-while-coroutine-finishes.html
+            https://forum.unity.com/threads/download-a-file-from-url-and-save-it-to-persistentdatapath.520817/
+            https://forum.unity.com/threads/should-be-simple-but-i-just-cant-do-it-changing-texture-by-script.872356/
+
+            Additionally, https://docs.unity3d.com was referenced for general documentation on Unity scripting including the following posts:
+            https://docs.unity3d.com/ScriptReference/Transform-rotation.html
+            https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
         */
+
         string datFile = string.Format("{0}.dat", robot.multi_target_dataset);
         string xmlFile = string.Format("{0}.xml", robot.multi_target_dataset);
 
@@ -162,23 +180,23 @@ public class dynamic_menu : MonoBehaviour
             targetName);    
 
 
-        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane); //https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
+        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         plane.transform.SetParent(target.transform);
         
         //Update plane transform (these values were found by trial and error)
         plane.transform.position = new Vector3(0, 0, (float)0.25);
 
-        Quaternion rotate = Quaternion.Euler(0, 180, 0); //https://docs.unity3d.com/ScriptReference/Transform-rotation.html
+        Quaternion rotate = Quaternion.Euler(0, 180, 0); 
         plane.transform.rotation = rotate;
 
         plane.transform.localScale = new Vector3((float)0.025, (float)0.025, (float)0.025);
 
         //Update plane material
-        var render = plane.GetComponent<Renderer>(); // https://forum.unity.com/threads/should-be-simple-but-i-just-cant-do-it-changing-texture-by-script.872356/
-        var emoji_material = Resources.Load<Material>("Emojis/Materials/happy"); //default to happy face
+        var render = plane.GetComponent<Renderer>(); 
+        var emoji_material = Resources.Load<Material>("Emojis/Materials/happy"); //default material to happy face
         render.material = emoji_material;
 
-        target.enabled = false; //default to inactive
+        target.enabled = false; //default target to inactive
 
         robot.multi_target_behavior = target;
     }

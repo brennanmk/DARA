@@ -1,9 +1,12 @@
 /*
 Brennan Miller-Klugman
 Last Edited: 10/2/22
-based off code from:
+
+References:
 https://dev.mysql.com/doc/connector-net/en/connector-net-tutorials-sql-command.html
 https://github.com/freseco/Unity3d_MySQL_Client
+https://stackoverflow.com/questions/37344167/how-to-get-float-value-with-sqldatareader
+https://library.vuforia.com/objects/create-and-load-targets-unity
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -54,7 +57,7 @@ namespace Unity.Robotics.ROSTCPConnector
                             var texture = DownloadHandlerTexture.GetContent(uwr);
                             imageFromWeb = texture;
                             Debug.Log("Image downloaded " + uwr);
-                            CreateImageTargetFromDownloadedTexture(rdr[1].ToString(), imageFromWeb, (float)rdr[2], rdr[3].ToString(), (int)rdr[4], (int)rdr[5]); //https://stackoverflow.com/questions/37344167/how-to-get-float-value-with-sqldatareader
+                            CreateImageTargetFromDownloadedTexture(rdr[1].ToString(), imageFromWeb, (float)rdr[2], rdr[3].ToString(), (int)rdr[4], (int)rdr[5]); 
                         }
                     }
                 }

@@ -6,6 +6,8 @@ Updates static variables (from database) on a timer
 
 References:
 https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+https://dev.mysql.com/doc/connector-net/en/connector-net-tutorials-sql-command.html
+https://github.com/freseco/Unity3d_MySQL_Client
 */
 
 using System.Collections;
@@ -48,8 +50,8 @@ public class variable_updater : MonoBehaviour
             MySqlDataReader rdr = cmd.ExecuteReader();
 
             while (rdr.Read())
-                { //update vars
-                    static_variables.robot[val].ros_connection.RosIPAddress = rdr[0].ToString(); //update ROS Connection
+                { //update static variables
+                    static_variables.robot[val].ros_connection.RosIPAddress = rdr[0].ToString(); 
                     static_variables.robot[val].ros_connection.RosPort = (int)rdr[1];
 
                     static_variables.robot[val].twist_topic = rdr[2].ToString();

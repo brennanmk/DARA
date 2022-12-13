@@ -3,6 +3,9 @@
 Brennan Miller-Klugman
 Last Edited: 10/2/22
 based off of Vuforia DefaultEventHandler, modified to work with multiple image targets
+
+References:
+https://library.vuforia.com
 */
 
 /*==============================================================================
