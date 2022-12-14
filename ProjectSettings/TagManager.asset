@@ -12,6 +12,7 @@ TagManager:
   - scripts
   - side_bar
   - 1dof_joystick
+  - cam
   layers:
   - Default
   - TransparentFX

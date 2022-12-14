@@ -27,19 +27,22 @@ public class dynamic_menu : MonoBehaviour
     public GameObject menu_item_container;
     public GameObject menu_item;
 
+    public GameObject emoji_cube;
+
+
     private List<GameObject> headers = new List<GameObject>();
 
     public void create()
     /*
-    The create function is used to dynamically create menu options for each robot
+        The create function is used to dynamically create menu options for each robot
 
-    References:
-    https://gamedev.stackexchange.com/questions/102431/how-to-create-gui-image-with-script
-    https://stackoverflow.com/questions/69427848/how-to-modify-ui-text-via-script
-    https://docs.unity3d.com/2018.1/Documentation/ScriptReference/UI.Toggle-onValueChanged.html
-    https://answers.unity.com/questions/674127/how-to-find-a-prefab-via-script.html
-    https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
-    https://www.w3schools.com/cs/cs_switch.php
+        References:
+        https://gamedev.stackexchange.com/questions/102431/how-to-create-gui-image-with-script
+        https://stackoverflow.com/questions/69427848/how-to-modify-ui-text-via-script
+        https://docs.unity3d.com/2018.1/Documentation/ScriptReference/UI.Toggle-onValueChanged.html
+        https://answers.unity.com/questions/674127/how-to-find-a-prefab-via-script.html
+        https://answers.unity.com/questions/1271901/index-out-of-range-when-using-delegates-to-set-onc.html
+        https://www.w3schools.com/cs/cs_switch.php
     */
     {
         for(int val = 0; val < static_variables.robot.Count; val++)
@@ -176,22 +179,24 @@ public class dynamic_menu : MonoBehaviour
             MultiTargetBehaviour target = VuforiaBehaviour.Instance.ObserverFactory.CreateMultiTarget(
                 savePath_xml,
                 targetName);    
+            
+            var handler = target.gameObject.AddComponent<DefaultObserverEventHandler>(); //add event handler
+            handler.UsePoseSmoothing = true;
             Debug.Log(targetName);
+
 
             GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
             plane.transform.SetParent(target.transform);
             
-            //Update plane transform (these values were found by trial and error)
+            //Update cube transform (these values were found by trial and error)
             plane.transform.position = new Vector3(0, 0, (float)0.25);
 
+            plane.transform.rotation = Quaternion.Euler(90, 0, 0);
 
+            plane.transform.localScale = new Vector3((float)0.2, (float)0.2, (float)0.2);
 
-            plane.transform.localScale = new Vector3((float)0.025, (float)0.025, (float)0.025);
+            plane.AddComponent<face_camera>(); //add script to face camera
 
-            //Update plane material
-            var render = plane.GetComponent<Renderer>(); 
-            var emoji_material = Resources.Load<Material>("Emojis/Materials/happy"); //default material to happy face
-            render.material = emoji_material;
 
             target.enabled = false; //default target to inactive
 

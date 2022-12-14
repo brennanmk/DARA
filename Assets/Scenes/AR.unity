@@ -1342,3 +1342,5 @@ MonoBehaviour:
     type: 3}
   menu_item: {fileID: 7541585023474423801, guid: 1df312523bea081408ef7563e065d83c,
     type: 3}
+  emoji_cube: {fileID: 3455696871480330327, guid: 028cfcb15ea0396478f164173bef081a,
+    type: 3}
