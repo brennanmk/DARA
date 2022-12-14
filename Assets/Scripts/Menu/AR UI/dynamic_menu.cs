@@ -170,34 +170,33 @@ public class dynamic_menu : MonoBehaviour
 
             System.IO.File.WriteAllBytes(savePath_xml, results_xml);
             Debug.Log("File successfully downloaded and saved to " + savePath_xml);
+            
+            string targetName = robot.multi_target_name;
+
+            MultiTargetBehaviour target = VuforiaBehaviour.Instance.ObserverFactory.CreateMultiTarget(
+                savePath_xml,
+                targetName);    
+            Debug.Log(targetName);
+
+            GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            plane.transform.SetParent(target.transform);
+            
+            //Update plane transform (these values were found by trial and error)
+            plane.transform.position = new Vector3(0, 0, (float)0.25);
+
+
+
+            plane.transform.localScale = new Vector3((float)0.025, (float)0.025, (float)0.025);
+
+            //Update plane material
+            var render = plane.GetComponent<Renderer>(); 
+            var emoji_material = Resources.Load<Material>("Emojis/Materials/happy"); //default material to happy face
+            render.material = emoji_material;
+
+            target.enabled = false; //default target to inactive
+
+            robot.multi_target_behavior = target;
         }
 
-        string dataSetPath = string.Format("{0}/{1}.xml", Application.persistentDataPath, robot.name); 
-        string targetName = robot.multi_target_name;
-
-        MultiTargetBehaviour target = VuforiaBehaviour.Instance.ObserverFactory.CreateMultiTarget(
-            dataSetPath,
-            targetName);    
-
-
-        GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        plane.transform.SetParent(target.transform);
-        
-        //Update plane transform (these values were found by trial and error)
-        plane.transform.position = new Vector3(0, 0, (float)0.25);
-
-        Quaternion rotate = Quaternion.Euler(0, 180, 0); 
-        plane.transform.rotation = rotate;
-
-        plane.transform.localScale = new Vector3((float)0.025, (float)0.025, (float)0.025);
-
-        //Update plane material
-        var render = plane.GetComponent<Renderer>(); 
-        var emoji_material = Resources.Load<Material>("Emojis/Materials/happy"); //default material to happy face
-        render.material = emoji_material;
-
-        target.enabled = false; //default target to inactive
-
-        robot.multi_target_behavior = target;
     }
 }
