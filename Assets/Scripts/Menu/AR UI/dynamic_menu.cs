@@ -29,7 +29,6 @@ public class dynamic_menu : MonoBehaviour
 
     public GameObject emoji_cube;
 
-
     private List<GameObject> headers = new List<GameObject>();
 
     public void create()
@@ -179,24 +178,21 @@ public class dynamic_menu : MonoBehaviour
             MultiTargetBehaviour target = VuforiaBehaviour.Instance.ObserverFactory.CreateMultiTarget(
                 savePath_xml,
                 targetName);    
-            
+                
             var handler = target.gameObject.AddComponent<DefaultObserverEventHandler>(); //add event handler
             handler.UsePoseSmoothing = true;
             Debug.Log(targetName);
 
-
-            GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            plane.transform.SetParent(target.transform);
+            GameObject cube_emoji = Instantiate(emoji_cube);
+            cube_emoji.transform.SetParent(target.transform);
             
             //Update cube transform (these values were found by trial and error)
-            plane.transform.position = new Vector3(0, 0, (float)0.25);
+            cube_emoji.transform.position = new Vector3(0, (float)0.1, (float)0.25);
 
-            plane.transform.rotation = Quaternion.Euler(90, 0, 0);
+            Quaternion rotate = Quaternion.Euler(90, 0, 0); //https://docs.unity3d.com/ScriptReference/Transform-rotation.html
+            cube_emoji.transform.rotation = rotate;
 
-            plane.transform.localScale = new Vector3((float)0.2, (float)0.2, (float)0.2);
-
-            plane.AddComponent<face_camera>(); //add script to face camera
-
+            cube_emoji.transform.localScale = new Vector3((float)0.2, (float)0.2, (float)0.2);
 
             target.enabled = false; //default target to inactive
 

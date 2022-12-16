@@ -20,40 +20,45 @@ using affect = RosMessageTypes.Std.StringMsg;
 public class visual_affects : MonoBehaviour
 {
     public data robot;
-    public Renderer img;
+    public emoji_cube_update img;
     void Start()
     {
         ROSConnection.GetOrCreateInstance().Subscribe<affect>(robot.affect_topic, updateAffect); //create subscriber
 
-        GameObject emoji_plane = robot.multi_target_behavior.transform.GetChild(0).gameObject; 
-        img = emoji_plane.gameObject.GetComponent<Renderer>();
+        GameObject emoji_cube = robot.multi_target_behavior.transform.GetChild(0).gameObject; 
+        img = emoji_cube.gameObject.GetComponent<emoji_cube_update>();
     }
 
     void updateAffect(affect affectMessage) //on subscribe, update the emoji based on message contents
     {
         if (affectMessage.data == "happy")
         {
-            img.material = Resources.Load<Material>("Emojis/Materials/happy");
+            img.update_render(Resources.Load<Material>("Emojis/Materials/happy"));
         }
         else if (affectMessage.data == "sad")
         {
-            img.material = Resources.Load<Material>("Emojis/Materials/sad");
+            img.update_render(Resources.Load<Material>("Emojis/Materials/sad"));
+
         }
         else if (affectMessage.data == "angry")
         {
-            img.material = Resources.Load<Material>("Emojis/Materials/angry");
+            img.update_render(Resources.Load<Material>("Emojis/Materials/angry"));
+
         }
         else if (affectMessage.data == "neutral")
         {
-            img.material = Resources.Load<Material>("Emojis/Materials/neutral");
+            img.update_render(Resources.Load<Material>("Emojis/Materials/neutral"));
+
         }
         else if (affectMessage.data == "confused")
         {
-            img.material = Resources.Load<Material>("Emojis/Materials/confused");
+            img.update_render(Resources.Load<Material>("Emojis/Materials/confused"));
+
         } 
         else if (affectMessage.data == "tired")
         {
-            img.material = Resources.Load<Material>("Emojis/Materials/tired");
+            img.update_render(Resources.Load<Material>("Emojis/Materials/tired"));
+
         }
     }
 }
