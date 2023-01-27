@@ -4,36 +4,75 @@
     Last Edited - 1/26/23
 
     Sources:
-        https://stackoverflow.com/questions/68531903/updating-a-number-on-a-webpage-without-reloading-using-flask 
+        https://stackoverflow.com 
+            More specifically: 
+                /questions/68531903/updating-a-number-on-a-webpage-without-reloading-using-flask 
+                /questions/6756104/get-size-of-json-object
+        https://www.w3schools.com
+        https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/statusText
 -->
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <head>
     <meta charset="UTF-8">
+
+    <style>
+        body {
+            background-color: #424549;
+        }
+    </style>
+
     <title>Database Manager</title>
 </head>
 
 <body>
-    <h1>Welcome to FlaskBlog</h1>
+    <table class="table" id="database">
+        <tr>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Country</th>
+        </tr>
+      </table> 
 </body>
 
 
 <script>
-    var bar = document.getElementById("bar");
+    var table = document.getElementById("database");
+    var ids = []; //used to track which entries have already been added
     setInterval(function () {
         $.ajax({
             url: "/data",
             type: "get",
             success: function (response) {
-                bar.value = response;
+                var data = JSON.parse(response);
+
+                for(var i = 0; i < data.length; i++){ //update existing entries
+                    if(ids.includes(data[i].id)){
+                        var row = table.rows(ids.indexOf(data[i].id) + 1); //+1 offset to account for header row 
+                        for(var j = 0; j < Object.keys(data[i]).length; j++){
+                            var cell = row.cells[j];
+                            cell.innerHTML = data[i][j];
+                        }
+                    } else { //add new entries
+                        ids.push(data[i].id);
+                        var row = table.insertRow();
+                        for(var j = 0; j < Object.keys(data[i]).length; j++){
+                            var cell = row.insertCell(j);
+                            cell.innerHTML = data[i][j];
+                        }
+                    }
+
+                }
             },
             error: function (xhr) {
-                //Handel error
+                throw new Error(xhr.statusText);
             }
         });
-    }, 1000);
+    }, 1000); //refresh table contents every second
 </script>
 
 </html>
