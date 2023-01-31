@@ -2,27 +2,20 @@
 https://docs.peewee-orm.com/en/latest/peewee/api.html
 https://docs.peewee-orm.com/en/latest/peewee/quickstart.html
 https://docs.python.org/3/library/csv.html
+https://www.geeksforgeeks.org/python-convert-list-of-dictionaries-to-json/
 '''
 
 from peewee import *
 import csv
+import json
 
-db = MySQLDatabase('ar', host='98.229.202.174', port=3307, user='root', password='NveQlG8bKp89hPWMdhdC6jBnd')
+db = MySQLDatabase('ar', host='98.229.202.174', port=3307, user='root', password='yG6DH8W>bhR#}.0Q')
 
 class robots(Model):
     name = CharField()
     ip_addr = CharField()
     port = IntegerField()
     image = CharField()
-    urdf = CharField()
-    twist_topic = CharField()
-    twist_speed = FloatField()
-    base_dof = IntegerField()
-    image_target_width = FloatField()
-    multi_target_dataset = CharField()
-    multi_target_name = CharField()
-    affect_topic = CharField()
-
     class Meta:
 
         database = db
@@ -32,38 +25,29 @@ class database_controller():
     def __init__(self):
         self.robots = robots()
 
-    def create_tables(self):      
-        self.robots.create_table()
-
-    def drop_tables(self):      
-        self.robots.drop_table()
-
-    def populate_tables(self):
-        with open('data.csv') as csv_file:
-                data = csv.DictReader(csv_file)
-
-                for vals in data:
-                    self.robots.create(
-                        name= vals['robot_name'],
-                        ip_addr = vals['ros_master_uri'],
-                        port = vals['ros_master_port'],
-                        image = vals['image_target_location'],
-                        urdf = vals['urdf_location'],
-                        base_dof = int(vals['base_dof']),
-                        twist_topic = vals['twist_topic'],
-                        twist_speed = float(vals['twist_speed']),
-                        image_target_width = float(vals['image_target_width']),
-                        multi_target_dataset = vals['multi_target_dataset'],
-                        multi_target_name = vals['multi_target_name'],
-                        affect_topic = vals['affect_topic']
-                    ).save()
+    def add_to_table(self, nm, ip, prt, im):
+        self.robots.create(
+            name= nm,
+            ip_addr = ip,
+            port = prt,
+            image = im,
+        ).save()
     
-    def getData(self):
-        for robot in robots.select():
-            
+    def update_table(self, index, nm, ip, prt, im):
+        robot = self.robots.get(robots.id == index)
+        robot.name= nm if nm != '' else robots.name
+        robot.ip_addr = ip if ip != '' else robots.ip_addr
+        robot.port = prt if prt != '' else robots.port
+        robot.image = im if im != '' else robots.image
+        robot.save()
+    
+    def delete(self, index):
+        self.robots.delete().where(robots.id == index).execute()
 
-if __name__ == '__main__':
-    controller = database_controller()
-    controller.drop_tables()
-    controller.create_tables()
-    controller.populate_tables()
+    def getData(self):
+        data = []
+        for robot in robots.select():
+            data.append({'id': robot.id, 'name': robot.name, 'ip_addr': robot.ip_addr, 'port': robot.port, 'image': robot.image})
+        
+        return json.dumps(data)
+
