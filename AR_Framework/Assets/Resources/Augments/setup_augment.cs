@@ -17,24 +17,22 @@ public class setup_augment : MonoBehaviour
     public string config_location;
     public data robot;
 
-    public JObject config_json;
+    public GameObject augment_prefab;
 
-    public void read_config()
-    {
-        StartCoroutine(read_config_coroutine());
-    }
-
-    public IEnumerator read_config_coroutine()
+    public IEnumerator read_config(System.Action<JToken> callback)
     {
         // read config file
-        UnityWebRequest config_web_query = UnityWebRequest.Get("config_location");
+        UnityWebRequest config_web_query = UnityWebRequest.Get(config_location);
         yield return config_web_query.SendWebRequest();
 
         var config = config_web_query.downloadHandler.text;
 
-        var _json = JObject.Parse(config);
+        Debug.Log(config);
+        
 
-        config_json = _json;
+        var _json = JToken.Parse(config);
+
+        callback(_json);
 
     }
 }

@@ -64,35 +64,42 @@ public class dynamic_menu : MonoBehaviour
             item_container.transform.SetParent(container.transform);
 
             //query robot_features table
-            string sql = $"SELECT name, config FROM augments WHERE id = {static_variables.robot[val].id}";
+            string sql = $"SELECT name, config, location FROM augments WHERE robot_id = {static_variables.robot[val].id}";
             MySqlDataReader rdr = db_handler.query(sql);
 
             while (rdr.Read())
                 { //update static variables 
                     var ft_name = rdr[0].ToString();
-                    var config = rdr[2].ToString();
+                    var config = rdr[1].ToString();
+                    var location = "Augments/"  + rdr[2].ToString();
 
                     GameObject m_item = Instantiate(menu_item);
                     m_item.name = static_variables.robot[val].name + ft_name;
                     m_item.transform.SetParent(item_container.transform);
                     m_item.GetComponentInChildren<TextMeshProUGUI>().text = ft_name;
 
-                    var prefab = (GameObject)Resources.Load("Assets.Augments." + ft_name, typeof(GameObject));
+                    var prefab = (GameObject)Resources.Load(location, typeof(GameObject));
                     var instant = Instantiate(prefab);
                     instant.name = ft_name + '_' + static_variables.robot[val].name;
                     instant.transform.SetParent(overlay.transform);
-
-                    instant.GetComponent<setup_augment>().config_location = config;
+                    
                     instant.GetComponent<setup_augment>().robot = static_variables.robot[val];
+                    instant.GetComponent<setup_augment>().config_location = config;
                     
                     m_item.GetComponent<Toggle>().onValueChanged.AddListener(delegate { 
                     instant.SetActive(m_item.GetComponent<Toggle>().isOn);
                     side_bar.SetActive(!m_item.GetComponent<Toggle>().isOn);
                     open_menu_button.SetActive(m_item.GetComponent<Toggle>().isOn);
                     });
+
+                    instant.SetActive(false);
                 }
             
             rdr.Close();
+
+            item_container.SetActive(false); //default to inactive
+            header.GetComponent<toggle_dropdown>().dropdown_content = item_container; //assign item container to header for the toggle button
+
        
         }
     }

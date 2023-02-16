@@ -35,53 +35,48 @@ public class one_dof_twist_publisher : MonoBehaviour
     {   
         // get component from parent
         var setup_config = GetComponentInParent<setup_augment>();
-        robot = setup_config.robot;
-
-        setup_config.read_config();
-
-        JObject config_json = setup_config.config_json;
-
         
-        // start the ROS connection
-        topicName = (string)config_json["twist_topic"];
-        twist_speed = (float)config_json["twist_speed"];
+        StartCoroutine(setup_config.read_config((JToken config_json) => {
+            // start the ROS connection
+            robot = setup_config.robot;
+            topicName = (string)config_json["twist_topic"];
+            twist_speed = (float)config_json["twist_speed"];
 
-        ros = robot.ros_connection;
-        ros.RegisterPublisher<twistMsg>(topicName);
+            ros = robot.ros_connection;
+            ros.RegisterPublisher<twistMsg>(topicName);
+
+            InvokeRepeating("publish_twist", 0.0f, publishMessageFrequency);
+        }
+        ));
     }
 
-    private void Update()
+    private void publish_twist()
     {
         Gamepad gamepad = Gamepad.current;
 
-        timeElapsed += Time.deltaTime;
+        Vector2 input = gamepad.leftStick.ReadValue();
 
-        if (timeElapsed > publishMessageFrequency)
-        {
-            Vector2 input = gamepad.leftStick.ReadValue();
+        vector linear = new vector(
+            input.x * twist_speed,
+            0.0,
+            0.0
+        );
 
-            vector linear = new vector(
-                input.x * twist_speed,
-                0.0,
-                0.0
-            );
+        vector angular = new vector(
+            0.0,
+            0.0,
+            input.y * twist_speed
+        );
 
-            vector angular = new vector(
-                0.0,
-                0.0,
-                input.y * twist_speed
-            );
+        twistMsg twist = new  twistMsg(
+            linear,
+            angular
+        );
 
-            twistMsg twist = new  twistMsg(
-                linear,
-                angular
-            );
+        // Finally send the message to server_endpoint.py running in ROS
+        ros.Publish(topicName, twist);
 
-            // Finally send the message to server_endpoint.py running in ROS
-            ros.Publish(topicName, twist);
-
-            timeElapsed = 0;
-        }
+        timeElapsed = 0;
     }
 }
 
