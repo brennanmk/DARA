@@ -14,14 +14,16 @@ class robots(Model):
     ip_addr = CharField()
     port = IntegerField()
     image = CharField()
+    image_target_width = FloatField()
     class Meta:
 
         database = db
         db_table = 'robots'
 
 class augments(Model):
-    id = IntegerField()
+    robot_id = IntegerField()
     name = CharField()
+    location = CharField()
     config = CharField()
 
     class Meta:
@@ -51,6 +53,7 @@ class database_controller():
                         ip_addr = vals['ros_master_uri'],
                         port = vals['ros_master_port'],
                         image = vals['image_target_location'],
+                        image_target_width = float(vals['image_target_width']),
                     ).save()
 
         with open('augments.csv') as csv_file:
@@ -58,8 +61,9 @@ class database_controller():
 
                 for vals in data:
                     self.augments.create(
-                        id = vals['id'],
+                        robot_id = vals['id'],
                         name= vals['name'],
+                        location = vals['location'],
                         config = vals['config'],
                     ).save()
 
