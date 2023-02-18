@@ -9,11 +9,11 @@ C:\Program Files\Unity\Hub\Editor\2021.3.13f1\Editor\Unity.exe
 -batchMode
 -noUpm
 -name
-AssetImportWorker2
+AssetImportWorker3
 -projectPath
 C:/Users/Brennan/AR_Framework/AR_Framework
 -logFile
-Logs/AssetImportWorker2.log
+Logs/AssetImportWorker3.log
 -srvPort
 65035
 Successfully changed project path to: C:/Users/Brennan/AR_Framework/AR_Framework
@@ -47,8 +47,8 @@ C:/Users/Brennan/AR_Framework/AR_Framework
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 135.43 ms, found 6 plugins.
-Preloading 2 native plugins for Editor in 2.21 ms.
+Refreshing native plugins compatible for Editor in 150.97 ms, found 6 plugins.
+Preloading 2 native plugins for Editor in 2.62 ms.
 Initialize engine version: 2021.3.13f1 (9e7d58001ecf)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.13f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path C:/Users/Brennan/AR_Framework/AR_Framework/Assets
@@ -63,51 +63,51 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.13f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.13f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.13f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56960
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56732
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.13f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.13f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.13f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.13f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.006831 seconds.
+Registered in 0.005865 seconds.
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 125.89 ms, found 6 plugins.
+Refreshing native plugins compatible for Editor in 137.55 ms, found 6 plugins.
 Preloading 2 native plugins for Editor in 0.18 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.570 seconds
+- Completed reload, in  0.584 seconds
 Domain Reload Profiling:
-	ReloadAssembly (571ms)
-		BeginReloadAssembly (51ms)
+	ReloadAssembly (584ms)
+		BeginReloadAssembly (49ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (432ms)
-			LoadAssemblies (50ms)
+			CreateAndSetChildDomain (0ms)
+		EndReloadAssembly (454ms)
+			LoadAssemblies (47ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (87ms)
+			SetupTypeCache (82ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (23ms)
-			SetupLoadedEditorAssemblies (280ms)
+			RebuildScriptCaches (20ms)
+			SetupLoadedEditorAssemblies (309ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (48ms)
+				InitializePlatformSupportModulesInManaged (46ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (126ms)
+				RefreshPlugins (138ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (70ms)
-				ProcessInitializeOnLoadMethodAttributes (35ms)
+				ProcessInitializeOnLoadAttributes (84ms)
+				ProcessInitializeOnLoadMethodAttributes (40ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.016036 seconds.
+Registered in 0.014037 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\Brennan\AR_Framework\AR_Framework\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\Brennan\AR_Framework\AR_Framework\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
@@ -115,8 +115,8 @@ Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 141.02 ms, found 6 plugins.
-Preloading 2 native plugins for Editor in 0.08 ms.
+Refreshing native plugins compatible for Editor in 128.96 ms, found 6 plugins.
+Preloading 2 native plugins for Editor in 0.12 ms.
 Curl error 42: Callback aborted
 DisplayProgressbar: Restoring NuGet Packages
 Curl error 42: Callback aborted
@@ -247,43 +247,43 @@ UnityEngine.Debug:LogError (object)
 UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 
 Mono: successfully reloaded assembly
-- Completed reload, in  4.075 seconds
+- Completed reload, in  3.921 seconds
 Domain Reload Profiling:
-	ReloadAssembly (4075ms)
-		BeginReloadAssembly (183ms)
+	ReloadAssembly (3921ms)
+		BeginReloadAssembly (182ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (115ms)
-		EndReloadAssembly (3797ms)
-			LoadAssemblies (81ms)
+			CreateAndSetChildDomain (116ms)
+		EndReloadAssembly (3646ms)
+			LoadAssemblies (83ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (270ms)
+			SetupTypeCache (277ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (70ms)
-			SetupLoadedEditorAssemblies (3315ms)
+			RebuildScriptCaches (63ms)
+			SetupLoadedEditorAssemblies (3177ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (13ms)
+				InitializePlatformSupportModulesInManaged (14ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (141ms)
-				BeforeProcessingInitializeOnLoad (140ms)
-				ProcessInitializeOnLoadAttributes (2852ms)
-				ProcessInitializeOnLoadMethodAttributes (161ms)
-				AfterProcessingInitializeOnLoad (8ms)
-				EditorAssembliesLoaded (1ms)
+				RefreshPlugins (129ms)
+				BeforeProcessingInitializeOnLoad (111ms)
+				ProcessInitializeOnLoadAttributes (2803ms)
+				ProcessInitializeOnLoadMethodAttributes (114ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (13ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 1.43 ms, found 6 plugins.
-Preloading 2 native plugins for Editor in 0.10 ms.
+Refreshing native plugins compatible for Editor in 1.26 ms, found 6 plugins.
+Preloading 2 native plugins for Editor in 0.09 ms.
 Unloading 6752 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 116 unused Assets / (457.4 KB). Loaded Objects now: 7456.
+Unloading 116 unused Assets / (457.3 KB). Loaded Objects now: 7456.
 Memory consumption went from 263.3 MB to 262.8 MB.
-Total: 15.869900 ms (FindLiveObjects: 0.562100 ms CreateObjectMapping: 0.250000 ms MarkObjects: 14.845200 ms  DeleteObjects: 0.210900 ms)
+Total: 12.197400 ms (FindLiveObjects: 0.428000 ms CreateObjectMapping: 0.402500 ms MarkObjects: 11.126700 ms  DeleteObjects: 0.238600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -296,21 +296,9 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
-Received Import Request.
-  Time since last request: 107675.185874 seconds.
-  path: Assets/Resources/Augments/Diagnostics/augment_cube.cs
-  artifactKey: Guid(6afaa2503de8aaf44935de905f495c52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Augments/Diagnostics/augment_cube.cs using Guid(6afaa2503de8aaf44935de905f495c52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80162d0ceff8d5ff2a96bdfcaefea3c8') in 0.029238 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 17.892153 seconds.
-  path: Assets/Resources/Augments/Diagnostics/diagnostic_augment.cs
-  artifactKey: Guid(928b311bd448980418fc030bccd6c762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Augments/Diagnostics/diagnostic_augment.cs using Guid(928b311bd448980418fc030bccd6c762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c88a334d2e668c028b7dd774d77f894') in 0.004555 seconds 
-========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.013039 seconds.
+Registered in 0.014233 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\Brennan\AR_Framework\AR_Framework\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\Brennan\AR_Framework\AR_Framework\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
@@ -318,8 +306,8 @@ Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 1.04 ms, found 6 plugins.
-Preloading 2 native plugins for Editor in 0.12 ms.
+Refreshing native plugins compatible for Editor in 1.06 ms, found 6 plugins.
+Preloading 2 native plugins for Editor in 0.13 ms.
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Cannot connect to Unity Package Manager local server
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
@@ -454,40 +442,40 @@ UnityEngine.Debug:LogError (object)
 UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.877 seconds
+- Completed reload, in  1.886 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1877ms)
-		BeginReloadAssembly (146ms)
+	ReloadAssembly (1886ms)
+		BeginReloadAssembly (137ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (49ms)
-		EndReloadAssembly (1640ms)
-			LoadAssemblies (92ms)
+			CreateAndSetChildDomain (51ms)
+		EndReloadAssembly (1656ms)
+			LoadAssemblies (87ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
 			SetupTypeCache (266ms)
 			ReleaseScriptCaches (1ms)
 			RebuildScriptCaches (36ms)
-			SetupLoadedEditorAssemblies (1022ms)
+			SetupLoadedEditorAssemblies (1030ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (20ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
 				BeforeProcessingInitializeOnLoad (68ms)
-				ProcessInitializeOnLoadAttributes (833ms)
+				ProcessInitializeOnLoadAttributes (841ms)
 				ProcessInitializeOnLoadMethodAttributes (94ms)
 				AfterProcessingInitializeOnLoad (5ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (4ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 7.50 ms, found 6 plugins.
-Preloading 2 native plugins for Editor in 0.08 ms.
+Refreshing native plugins compatible for Editor in 6.91 ms, found 6 plugins.
+Preloading 2 native plugins for Editor in 0.07 ms.
 Unloading 6636 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 102 unused Assets / (431.1 KB). Loaded Objects now: 7462.
 Memory consumption went from 252.7 MB to 252.3 MB.
-Total: 10.475200 ms (FindLiveObjects: 0.409700 ms CreateObjectMapping: 0.211500 ms MarkObjects: 9.650000 ms  DeleteObjects: 0.202900 ms)
+Total: 10.229300 ms (FindLiveObjects: 0.340100 ms CreateObjectMapping: 0.215000 ms MarkObjects: 9.486800 ms  DeleteObjects: 0.186500 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -501,91 +489,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 333.898960 seconds.
-  path: Assets/Resources/Augments/Diagnostics/diagnostic_augment.cs
-  artifactKey: Guid(928b311bd448980418fc030bccd6c762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Augments/Diagnostics/diagnostic_augment.cs using Guid(928b311bd448980418fc030bccd6c762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6baed0b81c679e5de376657e7ee69b28') in 0.013055 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 12.292082 seconds.
-  path: Assets/Resources/Augments/Diagnostics/diagnostic_augment.cs
-  artifactKey: Guid(928b311bd448980418fc030bccd6c762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Augments/Diagnostics/diagnostic_augment.cs using Guid(928b311bd448980418fc030bccd6c762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ff77ce052e39a7037e30b587c4fdd2a') in 0.002015 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 168.026629 seconds.
-  path: Packages/com.ptc.vuforia.engine/package.json
-  artifactKey: Guid(c0e3d889c2a8e4409a9be4e7899d2b51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/package.json using Guid(c0e3d889c2a8e4409a9be4e7899d2b51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16b232de3bc07ce4eb5ef02792346728') in 0.028228 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.734212 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia
-  artifactKey: Guid(9cc7219dd8ba923418d1b45d8600186b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia using Guid(9cc7219dd8ba923418d1b45d8600186b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c89aa2b05402bd8aada10731181a082b') in 0.004777 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 2.754081 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts
-  artifactKey: Guid(d3deae265caa6a947b9981c2a1bc15f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts using Guid(d3deae265caa6a947b9981c2a1bc15f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc6c60ab595716e63a19c2572f93fb97') in 0.004945 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.101677 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/VuforiaScripts.asmdef
-  artifactKey: Guid(4aa734a563557450591d3fe58a62a120) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/VuforiaScripts.asmdef using Guid(4aa734a563557450591d3fe58a62a120) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31cb55e4ee4122425bd425e74c2b80ff') in 0.005758 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.710872 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/DefaultObserverEventHandler.cs
-  artifactKey: Guid(886328de6a5c14cbb85854fdf1a5085b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/DefaultObserverEventHandler.cs using Guid(886328de6a5c14cbb85854fdf1a5085b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd83b20ccdffe436280ca87767052060d') in 0.004720 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.645094 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/DefaultInitializationErrorHandler.cs
-  artifactKey: Guid(c47f92041efbb4b429a4eafca855ebe3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/DefaultInitializationErrorHandler.cs using Guid(c47f92041efbb4b429a4eafca855ebe3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '106d0be4fdf957eabd20efeba8ae155a') in 0.004764 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.619060 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/DefaultAreaTargetEventHandler.cs
-  artifactKey: Guid(af19d4b80f4fc4950b99eb9ea78ab6ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/DefaultAreaTargetEventHandler.cs using Guid(af19d4b80f4fc4950b99eb9ea78ab6ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5bea769dd2e769790fe25815334c129b') in 0.004845 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.120661 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/BoundingBoxRenderer.cs
-  artifactKey: Guid(b0768a105a9bd48409a689214808185f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/BoundingBoxRenderer.cs using Guid(b0768a105a9bd48409a689214808185f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0eb2de3abc337646c81563977f73cb9') in 0.004853 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.260352 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/Internal
-  artifactKey: Guid(f5cecbfda7a73445eb60d7bcdface705) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/Internal using Guid(f5cecbfda7a73445eb60d7bcdface705) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71669f1aa47b934af4659f33723690c0') in 0.004905 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 4.940649 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/Internal/RuntimeOpenSourceInitializer.cs
-  artifactKey: Guid(2540246fb3ca1c34a9358b891acb61f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/Internal/RuntimeOpenSourceInitializer.cs using Guid(2540246fb3ca1c34a9358b891acb61f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83f9102f36453ef92ca89ee103d85787') in 0.004927 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.508099 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/Internal/ARFoundationIntegration
-  artifactKey: Guid(eff573da33ccf49d9a812ac13bb6aa2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/Internal/ARFoundationIntegration using Guid(eff573da33ccf49d9a812ac13bb6aa2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25141aa3a3db674a6ec0a71c7cdce85c') in 0.005499 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.692082 seconds.
-  path: Packages/com.ptc.vuforia.engine/Vuforia/Scripts/Internal/ARFoundationIntegration/ARFoundationFacade.cs
-  artifactKey: Guid(02018e9fe9c834e7ab5f9b08e5b63a9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.ptc.vuforia.engine/Vuforia/Scripts/Internal/ARFoundationIntegration/ARFoundationFacade.cs using Guid(02018e9fe9c834e7ab5f9b08e5b63a9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f638d21ea3c7c57bce5c3a6eec26bbd8') in 0.004884 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 363.102700 seconds.
-  path: Assets/Resources/VuforiaConfiguration.asset
-  artifactKey: Guid(d89e38773f6d92141859ab9454b79932) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/VuforiaConfiguration.asset using Guid(d89e38773f6d92141859ab9454b79932) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba11a4aed20867ee169bff720b482a1b') in 0.010527 seconds 
+  Time since last request: 108207.380878 seconds.
+  path: Packages/com.ptc.vuforia.engine/readme-add-package-via-git-url-reference-image.png
+  artifactKey: Guid(750cc6e77aa924340bf2262e41b7b3b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.ptc.vuforia.engine/readme-add-package-via-git-url-reference-image.png using Guid(750cc6e77aa924340bf2262e41b7b3b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7298f4822591eede8c0335662ad17fc9') in 0.069066 seconds 

@@ -49,6 +49,7 @@ MonoBehaviour:
   topicName: 
   dataset: 
   target_name: 
+  cube_: {fileID: 0}
   cube_object: {fileID: 7572040741522152879}
   battery_object: {fileID: 4087407498810301342}
   publishMessageFrequency: 0.1
