@@ -99,11 +99,10 @@ public class battery_augment : MonoBehaviour
             System.IO.File.WriteAllBytes(savePath_xml, results_xml);
             Debug.Log("File successfully downloaded and saved to " + savePath_xml);
             
-            string targetName = target_name;
 
             MultiTargetBehaviour target = VuforiaBehaviour.Instance.ObserverFactory.CreateMultiTarget(
                 savePath_xml,
-                targetName);    
+                target_name);    
             
             var handler = target.gameObject.AddComponent<DefaultObserverEventHandler>(); //add event handler
             handler.UsePoseSmoothing = true;
