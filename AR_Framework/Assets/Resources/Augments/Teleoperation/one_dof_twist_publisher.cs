@@ -28,8 +28,6 @@ public class one_dof_twist_publisher : MonoBehaviour
     // Publish the cube's position and rotation every N seconds
     public float publishMessageFrequency = 0.1f;
 
-    // Used to determine how much time has elapsed since the last message was published
-    private float timeElapsed;
 
     void Start()
     {   
@@ -76,7 +74,6 @@ public class one_dof_twist_publisher : MonoBehaviour
         // Finally send the message to server_endpoint.py running in ROS
         ros.Publish(topicName, twist);
 
-        timeElapsed = 0;
     }
 }
 
