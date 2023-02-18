@@ -24,7 +24,7 @@ public class battery_augment : MonoBehaviour
     public data robot;
     public string topicName, dataset, target_name;
     public augment_cube cube_;
-    public GameObject cube_object;
+    public GameObject cube_object, battery_object;
 
     // The game object
     // Publish the cube's position and rotation every N seconds
@@ -104,6 +104,8 @@ public class battery_augment : MonoBehaviour
                 savePath_xml,
                 target_name);    
             
+            target.transform.SetParent(battery_object.transform);
+
             var handler = target.gameObject.AddComponent<DefaultObserverEventHandler>(); //add event handler
             handler.UsePoseSmoothing = true;
           
@@ -135,4 +137,3 @@ public class battery_augment : MonoBehaviour
         }
     }
 }
-

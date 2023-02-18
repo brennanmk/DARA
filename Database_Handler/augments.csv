@@ -1,2 +1,3 @@
 id,name,location,config
 1,Joystick,Teleoperation/1dof_joystick,https://www.eecs.tufts.edu/~bmille12/configs/robot_teleop.json
+2,battery,Diagnostics/battery,"https://www.eecs.tufts.edu/~bmille12/dataset/SENSAR	"
