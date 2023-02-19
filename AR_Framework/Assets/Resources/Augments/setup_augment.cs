@@ -17,8 +17,6 @@ public class setup_augment : MonoBehaviour
     public string config_location;
     public data robot;
 
-    public GameObject augment_prefab;
-
     public IEnumerator read_config(System.Action<JToken> callback)
     {
         // read config file

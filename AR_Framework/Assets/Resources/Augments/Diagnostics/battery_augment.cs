@@ -38,13 +38,11 @@ public class battery_augment : MonoBehaviour
         StartCoroutine(setup_config.read_config((JToken config_json) => {
             // start the ROS connection
             robot = setup_config.robot;
+            ros = robot.ros_connection;
+
             topicName = (string)config_json["diagnostic_topic"];
             dataset = (string)config_json["multi_target_dataset"];
             target_name = (string)config_json["target_name"];
-
-
-            ros = robot.ros_connection;
-            ros.Subscribe<battery>(topicName, updateCube); //create subscriber
 
             StartCoroutine(getMultiTarget());
         }
@@ -118,6 +116,7 @@ public class battery_augment : MonoBehaviour
             cube_object.transform.rotation = rotate;
 
             cube_object.transform.localScale = new Vector3((float)0.2, (float)0.2, (float)0.2);
+            
         }
     }
 
@@ -125,15 +124,15 @@ public class battery_augment : MonoBehaviour
     {
 
         if (data.data <= 20){
-            cube_.update_render(Resources.Load<Material>("ux/Materials/critical_battery.mat"));
+            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/critical_battery"));
         } else if(data.data <= 40){
-            cube_.update_render(Resources.Load<Material>("ux/Materials/low_battery.mat"));
+            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/low_battery"));
         } else if(data.data <= 60){
-            cube_.update_render(Resources.Load<Material>("ux/Materials/half_battery.mat"));
+            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/half_battery"));
         } else if(data.data <= 80){
-            cube_.update_render(Resources.Load<Material>("ux/Materials/high_battery.mat"));
+            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/high_battery"));
         } else if(data.data <= 100){
-            cube_.update_render(Resources.Load<Material>("ux/Materials/full_battery.mat"));
+            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/full_battery"));
         }
     }
 }
