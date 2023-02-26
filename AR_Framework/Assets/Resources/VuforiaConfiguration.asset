@@ -17,16 +17,16 @@ MonoBehaviour:
     ufoLicenseKey: QVJpZHNNai8vLy8vQUFBQUtISWhGQUZ4bDBicXNZT0tFeC9CenowanJvMFBWYWh6cCtLak5iUUFLQS9zYWRwNFFIL2RDbEg2UmFjUXBzV01RcEQxbjFzUFNCa2E1dHBPTk54aXNxV2lNSFBtdVZZTFlOeFFVdFBsYk10MXg3S05tbmFVY2dGbUpJTC9UV0MrLzRNcExQYWYyQVMzVUFCeCswSWI0MlJxc0xYSzJCZUFTUnhhaWJCbXhOYUpXS3c0a2NlTC8ySWpjUEhGOEt3aGthZzFzRVZmTzVmYmY5ZTUzaHhvS2pxU3FpWUs0MGVnRnI5N3ZCUUJmcWtlWUVsQWthNzNEbEpOaFpZUnhUSThuUFV6dWx4bEpCOXJCTEhlT1UzVUYvZGJkRGYvVlN4dEJrU0NpeHIyeVdiemp1clBGQ0d1Q1A4RzBLYkxGeVQ0QkpZa1dIajRNK1dFaGVaL3BsblhxVnNLY04zQmU3bnhpMWxlYmxIUG91RHM=
     delayedInitialization: 0
     cameraFocusModeSetting: 2
-    cameraDeviceModeSetting: -1
+    cameraDeviceModeSetting: -2
     maxSimultaneousImageTargets: 4
     virtualSceneScaleFactor: 1
     modelTargetRecoWhileExtendedTracked: 1
     shareRecordingsInITunes: 0
     logLevel: 0
-    version: 10.11.3
+    version: 10.13.3
     eulaAcceptedVersions: '{"Values":["10.10","10.11","10.13"]}'
   database:
-    disableModelExtraction: 0
+    disableModelExtraction: 1
   shaders:
     depthMaskShader: {fileID: 4800000, guid: 1ce7eb78425fb1540838bc9d5d95857a, type: 3}
     outlineShader: {fileID: 4800000, guid: c1ded68d068051d4f92650fcddaae5c7, type: 3}
@@ -37,7 +37,7 @@ MonoBehaviour:
     unlitShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
     videoBackgroundEnabled: 1
   deviceTracker:
-    autoStartTracker: 1
+    autoStartTracker: 0
     arcoreRequirement: 1
     autoImportArcore: 1
     thirdPartyARCoreClientDetected: 1

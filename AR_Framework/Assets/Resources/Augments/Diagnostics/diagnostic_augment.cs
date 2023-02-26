@@ -22,13 +22,11 @@ public class diagnostic_augment : MonoBehaviour
     {
     ROSConnection ros;
     public data robot;
-    public string battery_topic, cpu_topic, temp_topic, dataset, target_name;
-    public augment_cube cube_;
-    public GameObject cube_object, battery_object;
+    public string battery_topic, cpu_usage_topic, cpu_temp_topic;
+    public augment_cube battery, cpu_usage, cpu_temp;
 
     // The game object
     // Publish the cube's position and rotation every N seconds
-    public float publishMessageFrequency = 0.1f;
 
     void Start()
     {   
@@ -40,129 +38,65 @@ public class diagnostic_augment : MonoBehaviour
             robot = setup_config.robot;
             ros = robot.ros_connection;
 
-            dataset = (string)config_json["multi_target_dataset"];
-            target_name = (string)config_json["target_name"];
-            battery_topic = (string)config_json["diagnostic_topic"];
-            cpu_topic = (string)config_json["diagnostic_topic"];
-            temp_topic = (string)config_json["diagnostic_topic"];
+            battery_topic = (string)config_json["battery_topic"];
+            cpu_usage_topic = (string)config_json["cpu_usage_topic"];
+            cpu_temp_topic = (string)config_json["cpu_temp_topic"];
 
-            StartCoroutine(getMultiTarget());
+            ros.Subscribe<integer>(cpu_usage_topic, update_cpu_usage);
+            ros.Subscribe<integer>(cpu_temp_topic, update_cpu_temp);
+            ros.Subscribe<integer>(battery_topic, update_battery);
+
         }
         ));
     }
 
-    public IEnumerator getMultiTarget()
+
+
+    void update_cpu_usage(integer data) //on subscribe, update the emoji based on message contents
     {
-        /* Function to create multi image target based on database info
-            References:
-            The following Unity forums were referenced:
-            https://answers.unity.com/questions/181893/copy-data-from-resources-to-persistent-data-path.html
-            https://answers.unity.com/questions/228150/hold-or-wait-while-coroutine-finishes.html
-            https://forum.unity.com/threads/download-a-file-from-url-and-save-it-to-persistentdatapath.520817/
-            https://forum.unity.com/threads/should-be-simple-but-i-just-cant-do-it-changing-texture-by-script.872356/
-            Additionally, https://docs.unity3d.com was referenced for general documentation on Unity scripting including the following posts:
-            https://docs.unity3d.com/ScriptReference/Transform-rotation.html
-            https://docs.unity3d.com/ScriptReference/GameObject.CreatePrimitive.html
-        */
 
-        string datFile = string.Format("{0}.dat", dataset);
-        string xmlFile = string.Format("{0}.xml", dataset);
-
-        //download dat
-        UnityWebRequest _dat = new UnityWebRequest(datFile);
-        _dat.downloadHandler = new DownloadHandlerBuffer();
-
-        yield return _dat.SendWebRequest();
-        if(_dat.isNetworkError || _dat.isHttpError) {
-            Debug.Log(_dat.error);
-        }
-        else {
-            byte[] results_dat = _dat.downloadHandler.data;
-            string savePath_dat = string.Format("{0}/{1}.dat", Application.persistentDataPath, robot.name);        
-
-            System.IO.File.WriteAllBytes(savePath_dat, results_dat);
-            Debug.Log("File successfully downloaded and saved to " + savePath_dat);
-        }
-
-        //download xml
-        UnityWebRequest _xml = new UnityWebRequest(xmlFile);
-        _xml.downloadHandler = new DownloadHandlerBuffer();
-
-        yield return _xml.SendWebRequest();
-        if(_xml.isNetworkError || _xml.isHttpError) {
-            Debug.Log(_xml.error);
-        }
-        else {
-            byte[] results_xml = _xml.downloadHandler.data;
-            string savePath_xml = string.Format("{0}/{1}.xml", Application.persistentDataPath, robot.name);        
-
-            System.IO.File.WriteAllBytes(savePath_xml, results_xml);
-            Debug.Log("File successfully downloaded and saved to " + savePath_xml);
-            
-
-            MultiTargetBehaviour target = VuforiaBehaviour.Instance.ObserverFactory.CreateMultiTarget(
-                savePath_xml,
-                target_name);    
-            
-            target.transform.SetParent(battery_object.transform);
-          
-            cube_object.transform.SetParent(target.transform);
-
-            //Update cube transform (these values were found by trial and error)
-            cube_object.transform.position = new Vector3(0, (float)0.1, (float)0.25);
-
-            Quaternion rotate = Quaternion.Euler(90, 0, 0); //https://docs.unity3d.com/ScriptReference/Transform-rotation.html
-            cube_object.transform.rotation = rotate;
-
-            cube_object.transform.localScale = new Vector3((float)0.2, (float)0.2, (float)0.2);
-            
+        if (data.data <= 20){
+            cpu_usage.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/1_bar"));
+        } else if(data.data <= 40){
+            cpu_usage.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/2_bar"));
+        } else if(data.data <= 60){
+            cpu_usage.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/3_bar"));
+        } else if(data.data <= 80){
+            cpu_usage.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/4_bar"));
+        } else if(data.data <= 100){
+            cpu_usage.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/5_bar"));
         }
     }
-
-
 
     void update_battery(integer data) //on subscribe, update the emoji based on message contents
     {
 
         if (data.data <= 20){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/critical_battery"));
+            battery.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/1_bar"));
         } else if(data.data <= 40){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/low_battery"));
+            battery.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/2_bar"));
         } else if(data.data <= 60){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/half_battery"));
+            battery.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/3_bar"));
         } else if(data.data <= 80){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/high_battery"));
+            battery.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/4_bar"));
         } else if(data.data <= 100){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/full_battery"));
+            battery.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/5_bar"));
         }
     }
 
-    void update_cpu_usage(integer data) //on subscribe, update the emoji based on message contents
+    void update_cpu_temp(integer data) //on subscribe, update the emoji based on message contents
     {
-        if (data.data <= 20){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/critical_battery"));
-        } else if(data.data <= 40){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/low_battery"));
-        } else if(data.data <= 60){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/half_battery"));
-        } else if(data.data <= 80){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/high_battery"));
-        } else if(data.data <= 100){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/full_battery"));
-        }
-    }
 
-    void update_cpu_temp(integer data){
         if (data.data <= 20){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/critical_battery"));
+            cpu_temp.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/1_bar"));
         } else if(data.data <= 40){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/low_battery"));
+            cpu_temp.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/2_bar"));
         } else if(data.data <= 60){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/half_battery"));
+            cpu_temp.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/3_bar"));
         } else if(data.data <= 80){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/high_battery"));
+            cpu_temp.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/4_bar"));
         } else if(data.data <= 100){
-            cube_.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/full_battery"));
+            cpu_temp.update_render(Resources.Load<Material>("Augments/Diagnostics/ux/Materials/5_bar"));
         }
     }
 }
