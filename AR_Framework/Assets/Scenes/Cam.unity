@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 743888971}
   - component: {fileID: 743888970}
-  - component: {fileID: 743888972}
+  - component: {fileID: 743888969}
   m_Layer: 0
   m_Name: ROS
   m_TagString: Untagged
@@ -141,6 +141,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &743888969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743888968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832e210ef0c0c6c4faf2b41d5918a8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &743888970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,11 +165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7acef0b79454c9b4dae3f8139bc4ba77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RosIPAddress: 10.0.20.136
+  m_RosIPAddress: 127.0.0.1
   m_RosPort: 10000
   m_ConnectOnStart: 1
-  m_KeepaliveTime: 5
-  m_NetworkTimeoutSeconds: 5
+  m_KeepaliveTime: 1
+  m_NetworkTimeoutSeconds: 2
   m_SleepTimeSeconds: 0.01
   m_ShowHUD: 1
   m_TFTopics:
@@ -178,20 +190,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &743888972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 743888968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c09416cc6acb064b866b7e5e82f116b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  topicName: image/compressed
-  OffsetFromCamera: 1
 --- !u!1 &1134602343
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,6 +471,8 @@ GameObject:
   - component: {fileID: 2126614515}
   - component: {fileID: 2126614514}
   - component: {fileID: 2126614513}
+  - component: {fileID: 2126614512}
+  - component: {fileID: 2126614511}
   m_Layer: 0
   m_Name: ARSession
   m_TagString: Untagged
@@ -480,6 +480,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2126614511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126614510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PointCloudPrefab: {fileID: 0}
+--- !u!114 &2126614512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126614510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520bb47c46cf8624fafb307b7d1b862a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 0}
 --- !u!114 &2126614513
 MonoBehaviour:
   m_ObjectHideFlags: 0
