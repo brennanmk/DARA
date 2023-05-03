@@ -23,8 +23,8 @@ MonoBehaviour:
     modelTargetRecoWhileExtendedTracked: 1
     shareRecordingsInITunes: 0
     logLevel: 0
-    version: 10.11.3
-    eulaAcceptedVersions: '{"Values":["10.10","10.11","10.13"]}'
+    version: 10.15.3
+    eulaAcceptedVersions: '{"Values":["10.10","10.11","10.13","10.15"]}'
   database:
     disableModelExtraction: 1
   shaders:
@@ -40,9 +40,9 @@ MonoBehaviour:
     autoStartTracker: 0
     arcoreRequirement: 2
     autoImportArcore: 1
-    thirdPartyARCoreClientDetected: 0
+    thirdPartyARCoreClientDetected: 1
   playmode:
-    mSequencePath: 
+    mRecordingPath: 
     playModeType: 0
   webcam:
     renderTextureLayer: 30
