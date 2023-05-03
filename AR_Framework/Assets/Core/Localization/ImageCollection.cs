@@ -28,8 +28,6 @@ public class ImageCollection : MonoBehaviour
 
     public string topicName = "image/compressed";
 
-    // Limit the number of points to bound the performance cost of rendering the point cloud.
-
     private ARCameraManager cameraManager;
 
     private void Start()
@@ -68,7 +66,7 @@ public class ImageCollection : MonoBehaviour
             inputRect = new RectInt(0, 0, image.width, image.height),
 
             // Downsample by 2.
-            outputDimensions = new Vector2Int(image.width, image.height),
+            outputDimensions = new Vector2Int(640, 480),
 
             // Color image format.
             outputFormat = TextureFormat.RGB24,
