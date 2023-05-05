@@ -23,10 +23,10 @@ public class depthImage : MonoBehaviour
 {
 
     ROSConnection ros;
-    Texture2D depth_texture, confidence_texture;
+    Texture2D depth_texture, camera_texture;
 
     public string DepthtopicName = "image/depth/compressed";
-    public string ConfidenceTopicName = "image/depth/confidence";
+    public string CameraTopicName = "image/compressed";
 
     // Limit the number of points to bound the performance cost of rendering the point cloud.
 
@@ -36,36 +36,36 @@ public class depthImage : MonoBehaviour
     {
         ros = ROSConnection.GetOrCreateInstance();
         ros.RegisterPublisher<img>(DepthtopicName);
-        ros.RegisterPublisher<img>(ConfidenceTopicName);
+        ros.RegisterPublisher<img>(CameraTopicName);
 
         depthManager = FindObjectOfType<AROcclusionManager>();
-        depthManager.frameReceived += OnCameraFrameReceived;
+        cameraManager = FindObjectOfType<ARCameraManager>();
+        cameraManager.frameReceived += OnCameraFrameReceived;
 
 
     }
 
 
-    void OnCameraFrameReceived(AROcclusionFrameEventArgs eventArgs)
+    void OnCameraFrameReceived(ARCameraFrameEventArgs eventArgs)
     {   
         // Get information about the device camera image.
-        if (depthManager.TryAcquireEnvironmentDepthCpuImage(out XRCpuImage depth_image) && depthManager.TryAcquireEnvironmentDepthConfidenceCpuImage(out XRCpuImage confidenceImage))
+        if (depthManager.TryAcquireEnvironmentDepthCpuImage(out XRCpuImage depth_image) && cameraManager.TryAcquireLatestCpuImage(out XRCpuImage camera_image))
         {
             // If successful, launch a coroutine that waits for the image
             // to be ready, then apply it to a texture.
-            StartCoroutine(ProcessImage(depth_image, confidenceImage));
+            StartCoroutine(ProcessImage(depth_image, camera_image));
 
             // It's safe to dispose the image before the async operation completes.
             depth_image.Dispose();
+            camera_image.Dispose();
         }
     }
 
-    IEnumerator ProcessImage(XRCpuImage depth_image, XRCpuImage confidence_image)
+    IEnumerator ProcessImage(XRCpuImage depth_image, XRCpuImage camera_image)
     {
         var depth_width = depth_image.width;
         var depth_height = depth_image.height;
 
-        var confidence_width = confidence_image.width;
-        var confidence_height = confidence_image.height;
         // Create the async conversion request.
 
         var depth_request = depth_image.ConvertAsync(new XRCpuImage.ConversionParams
@@ -77,35 +77,39 @@ public class depthImage : MonoBehaviour
             outputDimensions = new Vector2Int(depth_image.width, depth_image.height),
 
             // Color image format.
-            outputFormat = TextureFormat.R16
+            outputFormat = TextureFormat.R16,
 
+            transformation = XRCpuImage.Transformation.MirrorX
         });
 
-        var confidence_request = confidence_image.ConvertAsync(new XRCpuImage.ConversionParams
+        var camera_request = camera_image.ConvertAsync(new XRCpuImage.ConversionParams
         {
             // Use the full image.
-            inputRect = new RectInt(0, 0, confidence_image.width, confidence_image.height),
+            inputRect = new RectInt(0, 0, camera_image.width, camera_image.height),
 
             // Downsample by 2.
-            outputDimensions = new Vector2Int(confidence_image.width, confidence_image.height),
+            outputDimensions = new Vector2Int(depth_width, depth_height),
 
             // Color image format.
-            outputFormat = TextureFormat.R16
+            outputFormat = TextureFormat.RGB24,
+
+            transformation = XRCpuImage.Transformation.MirrorX
 
         });
 
         // Wait for the conversion to complete.
-        while (!depth_request.status.IsDone() || !confidence_request.status.IsDone())
+        while (!(depth_request.status.IsDone() && camera_request.status.IsDone()))
             yield return null;
 
         // Check status to see if the conversion completed successfully.
-        if (depth_request.status != XRCpuImage.AsyncConversionStatus.Ready || confidence_request.status != XRCpuImage.AsyncConversionStatus.Ready)
+        if (depth_request.status != XRCpuImage.AsyncConversionStatus.Ready || camera_request.status != XRCpuImage.AsyncConversionStatus.Ready)
         {
             // Something went wrong.
             Debug.LogErrorFormat("Request failed with status {0}", depth_request.status);
 
             // Dispose even if there is an error.
             depth_request.Dispose();
+            camera_request.Dispose();
             yield break;
         }
 
@@ -122,26 +126,26 @@ public class depthImage : MonoBehaviour
                 false);
         }
 
-        if (confidence_texture == null)
+        if (camera_texture == null)
         {
-            confidence_texture = new Texture2D(
-                confidence_width,
-                confidence_height,
-                confidence_request.conversionParams.outputFormat,
+            camera_texture = new Texture2D(
+                depth_width,
+                depth_height,
+                camera_request.conversionParams.outputFormat,
                 false);
         }
 
         depth_texture.LoadRawTextureData(rawDepthData);
         depth_texture.Apply();
 
-        confidence_texture.LoadRawTextureData(confidence_request.GetData<byte>());
-        confidence_texture.Apply();
+        camera_texture.LoadRawTextureData(camera_request.GetData<byte>());
+        camera_texture.Apply();
 
         byte[] depth_bytes = ImageConversion.EncodeToJPG(depth_texture);
-        byte[] confidence_bytes = ImageConversion.EncodeToJPG(confidence_texture);
+        byte[] camera_bytes = ImageConversion.EncodeToJPG(camera_texture);
 
         Destroy(depth_texture);
-        Destroy(confidence_texture);
+        Destroy(camera_texture);
 
         img depth = new img(
             header: new HeaderMsg(),
@@ -149,18 +153,18 @@ public class depthImage : MonoBehaviour
             data: depth_bytes
         );
 
-        img confidence = new img(
+        img camera = new img(
             header: new HeaderMsg(),
             format: "jpeg",
-            data: confidence_bytes
+            data: camera_bytes
         );
 
         ros.Publish(DepthtopicName, depth);
-        ros.Publish(ConfidenceTopicName, confidence);
+        ros.Publish(CameraTopicName, camera);
 
         // Need to dispose the request to delete resources associated
         // with the request, including the raw data.
         depth_request.Dispose();
-        confidence_request.Dispose();
+        camera_request.Dispose();
     }
 }
