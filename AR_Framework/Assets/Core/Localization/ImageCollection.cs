@@ -27,7 +27,8 @@ public class ImageCollection : MonoBehaviour
     private float timeElapsed;
 
     public string topicName = "image/compressed";
-
+    public int output_width = 640;
+    public int output_height =480;
     private ARCameraManager cameraManager;
 
     private void Start()
@@ -57,8 +58,6 @@ public class ImageCollection : MonoBehaviour
 
     IEnumerator ProcessImage(XRCpuImage image)
     {
-        var width = image.width;
-        var height = image.height;
         // Create the async conversion request.
         var request = image.ConvertAsync(new XRCpuImage.ConversionParams
         {
@@ -66,7 +65,7 @@ public class ImageCollection : MonoBehaviour
             inputRect = new RectInt(0, 0, image.width, image.height),
 
             // Downsample by 2.
-            outputDimensions = new Vector2Int(640, 480),
+            outputDimensions = new Vector2Int(output_width, output_height),
 
             // Color image format.
             outputFormat = TextureFormat.RGB24,

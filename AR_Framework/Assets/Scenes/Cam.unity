@@ -191,6 +191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topicName: ar_camera/compressed
+  output_width: 640
+  output_height: 360
 --- !u!1 &1134602343
 GameObject:
   m_ObjectHideFlags: 0
