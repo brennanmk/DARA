@@ -77,7 +77,7 @@ public class depthImage : MonoBehaviour
             outputDimensions = new Vector2Int(depth_image.width, depth_image.height),
 
             // Color image format.
-            outputFormat = TextureFormat.R16,
+            outputFormat = TextureFormat.R8,
 
             transformation = XRCpuImage.Transformation.MirrorX
         });
